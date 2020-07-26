@@ -2,21 +2,8 @@ import React from 'react';
 import { BookListModel } from './../models/book-list';
 import Book from './Book';
 import { BookModel } from '../models/book';
-import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
-
-const getBooksQuery = gql`
-{
-    books {
-        name
-        id
-        author {
-            name
-            age
-        }
-    }
-}
-`
+import { getBooksQuery } from './../queries/queries';
 
 interface PropsFromState {
     data: BookListModel
@@ -27,7 +14,7 @@ type AllProps = PropsFromState & PropsFromDispatch;
 
 
 const BookList = (props: any) => {
-    console.log(props)
+    // console.log(props)
     const { data } = props;
     const { books }: BookListModel = data;
     return (
