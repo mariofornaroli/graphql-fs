@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { BookListModel } from '../models/book-list';
 import { BookModel } from '../models/book';
 import { graphql } from 'react-apollo';
-import {flowRight as compose} from 'lodash';
+import { flowRight as compose } from 'lodash';
 import { AuthorModel } from '../models/author';
-import { getAuthorsQuery, addBookMutation } from './../queries/queries';
+import { getAuthorsQuery, addBookMutation, getBooksQuery } from './../queries/queries';
 
 const AddBook = (props: any) => {
     const [book, setBook] = useState(new BookModel());
@@ -31,12 +31,20 @@ const AddBook = (props: any) => {
 
     const executeAddBook = (e: any) => {
         e.preventDefault();
+        let _authorId = book.authorId;
+        if (!_authorId) {
+            const data = props.getAuthorsQuery;
+            if (data.authors) {
+                _authorId = data.authors[0].id;
+            }
+        }
         props.addBookMutation({
             variables: {
                 name: book.name,
                 genre: book.genre,
-                authorId: book.authorId
-            }
+                authorId: _authorId
+            },
+            refetchQueries: [{ query: getBooksQuery }]
         });
     }
 
@@ -66,6 +74,6 @@ const AddBook = (props: any) => {
     )
 }
 export default compose(
-    graphql(getAuthorsQuery, {name: "getAuthorsQuery"}),
-    graphql(addBookMutation, {name: "addBookMutation"})
+    graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
+    graphql(addBookMutation, { name: "addBookMutation" })
 )(AddBook);
