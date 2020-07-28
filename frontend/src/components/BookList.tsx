@@ -13,6 +13,15 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
+const BookListContainer = styled.div`
+    width      : 60%;
+    padding-top: 180px;
+`;
+
+const BookListUl = styled.ul`
+    list-style: none;
+`;
+
 const BookList = (props: any) => {
     const { data } = props;
     const { books }: BookListModel = data;
@@ -20,18 +29,18 @@ const BookList = (props: any) => {
 
     return (
         <>
-        <Title>This is a test title</Title>
-            <div className="book-list-container">
-                <ul className="book-list">
+            <Title>Testing GraphQl</Title>
+            <BookListContainer>
+                <BookListUl>
                     {
                         (data && data.loading) ? <div>Loading...</div> :
                             (data && books.map((b: BookModel) =>
                                 (<Book book={b} key={b.id} setSelectedBook={setSelectedBook} />)
                             ))
                     }
-                </ul>
+                </BookListUl>
 
-            </div>
+            </BookListContainer>
             {selectedBook && <BookDetails book={selectedBook} />}
         </>
     )

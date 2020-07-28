@@ -5,6 +5,19 @@ import { graphql } from 'react-apollo';
 import { flowRight as compose } from 'lodash';
 import { AuthorModel } from '../models/author';
 import { getAuthorsQuery, addBookMutation, getBooksQuery } from './../queries/queries';
+import styled from 'styled-components';
+
+const AddBookContainer = styled.div`
+    position       : fixed;
+    top            : 50px;
+    left           : 0;
+    width          : 60%;
+    height         : 180px;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    `
 
 const AddBook = (props: any) => {
     const [book, setBook] = useState(new BookModel());
@@ -49,7 +62,7 @@ const AddBook = (props: any) => {
     }
 
     return (
-        <div className="add-book-container">
+        <AddBookContainer>
             <form className="book-addition" onSubmit={executeAddBook}>
 
                 <div className="field">
@@ -72,7 +85,7 @@ const AddBook = (props: any) => {
                 <button>Add</button>
 
             </form>
-        </div>
+        </AddBookContainer>
     )
 }
 export default compose(
