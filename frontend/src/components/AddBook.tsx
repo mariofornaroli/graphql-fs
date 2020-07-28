@@ -49,28 +49,30 @@ const AddBook = (props: any) => {
     }
 
     return (
-        <form className="book-addition" onSubmit={executeAddBook}>
+        <div className="add-book-container">
+            <form className="book-addition" onSubmit={executeAddBook}>
 
-            <div className="field">
-                <label htmlFor="bookName">Book name</label>
-                <input type="text" name="name" id="bookName" onChange={changeFormValue} />
-            </div>
+                <div className="field">
+                    <label htmlFor="bookName">Book name</label>
+                    <input type="text" name="name" id="bookName" onChange={changeFormValue} />
+                </div>
 
-            <div className="field">
-                <label htmlFor="bookGenre">Genre</label>
-                <input type="text" name="genre" id="bookGenre" onChange={changeFormValue} />
-            </div>
+                <div className="field">
+                    <label htmlFor="bookGenre">Genre</label>
+                    <input type="text" name="genre" id="bookGenre" onChange={changeFormValue} />
+                </div>
 
-            <div className="field">
-                <label htmlFor="bookAuthor">Author</label>
-                <select name="authorId" id="bookAuthor" onChange={changeFormValue}>
-                    {getAuthorsOptions()}
-                </select>
-            </div>
+                <div className="field">
+                    <label htmlFor="bookAuthor">Author</label>
+                    <select name="authorId" id="bookAuthor" onChange={changeFormValue}>
+                        {getAuthorsOptions()}
+                    </select>
+                </div>
 
-            <button>Add</button>
+                <button>Add</button>
 
-        </form>
+            </form>
+        </div>
     )
 }
 export default compose(
